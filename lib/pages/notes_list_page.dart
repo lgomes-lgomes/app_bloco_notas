@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:app_bloco_notas/components/note_card_component.dart';
 import 'package:app_bloco_notas/models/note_model.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,26 @@ class _NotesListPageState extends State<NotesListPage> {
     NoteModel(name: 'name10', createdAt: DateTime.now(), note: 'note10'),
   ]);
 
+  Color? lastColor;
+
+  var colors = List.of([
+    Colors.blueAccent,
+    Colors.greenAccent,
+    Colors.yellowAccent,
+  ]);
+
+  var colors2 = List.of([
+    Colors.black,
+    Colors.grey,
+    Colors.purple,
+  ]);
+
+  Color color = Color(0xFF448AFF);
+  Color nextColor = Color(0xFFE040FB);
+  Color aux = Color(0);
+
+  // min + Random(). nextInt((max + 1) - min);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,14 +56,16 @@ class _NotesListPageState extends State<NotesListPage> {
       body: Container(
         color: const Color(0xff1d1d1f),
         padding: const EdgeInsets.all(16),
-        child: ListView.separated(
+        child: ListView.builder(
           itemBuilder: ((context, index) {
-            return NoteCardComponent(noteModel: notes[index]);
-          }),
-          separatorBuilder: ((context, index) {
-            return const Divider(
-              color: Color(0xfff5f5f7),
-              thickness: 1,
+            aux = color;
+            color = nextColor;
+            nextColor = aux;
+
+            return NoteCardComponent(
+              note: notes[index],
+              color: color,
+              nextColor: nextColor,
             );
           }),
           itemCount: notes.length,
