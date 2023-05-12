@@ -1,6 +1,8 @@
+import 'package:app_bloco_notas/models/enums/weekday_enum.dart';
 import 'package:app_bloco_notas/models/note_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NoteCardComponent extends StatelessWidget {
   const NoteCardComponent({
@@ -12,6 +14,8 @@ class NoteCardComponent extends StatelessWidget {
   final NoteModel note;
   final Color color;
   final Color nextColor;
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +37,14 @@ class NoteCardComponent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                '${note.createdAt.weekday.toString()} ${note.createdAt.day}',
-                style: const TextStyle(color: Colors.white, fontSize: 12),
-              ),
-              const SizedBox(
-                height: 2,
+                'Created at: ${DateFormat.yMMMEd().format(note.createdAt)}',
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
               Text(
                 note.name,
                 style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 22,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold),
               ),
               Row(),

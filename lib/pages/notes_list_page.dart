@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:app_bloco_notas/components/note_card_component.dart';
 import 'package:app_bloco_notas/models/note_model.dart';
 import 'package:flutter/material.dart';
@@ -25,25 +23,9 @@ class _NotesListPageState extends State<NotesListPage> {
     NoteModel(name: 'name10', createdAt: DateTime.now(), note: 'note10'),
   ]);
 
-  Color? lastColor;
-
-  var colors = List.of([
-    Colors.blueAccent,
-    Colors.greenAccent,
-    Colors.yellowAccent,
-  ]);
-
-  var colors2 = List.of([
-    Colors.black,
-    Colors.grey,
-    Colors.purple,
-  ]);
-
-  Color color = Color(0xFF448AFF);
-  Color nextColor = Color(0xFFE040FB);
+  Color color = Color.fromARGB(255, 62, 62, 66) ;
+  Color nextColor = Color.fromARGB(255, 86, 86, 90);
   Color aux = Color(0);
-
-  // min + Random(). nextInt((max + 1) - min);
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +36,7 @@ class _NotesListPageState extends State<NotesListPage> {
         title: const Text('Notas'),
       ),
       body: Container(
-        color: const Color(0xff1d1d1f),
-        padding: const EdgeInsets.all(16),
+        color: const Color.fromARGB(255, 51, 51, 54),
         child: ListView.builder(
           itemBuilder: ((context, index) {
             aux = color;
