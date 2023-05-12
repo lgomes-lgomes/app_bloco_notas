@@ -23,6 +23,10 @@ class _NotesListPageState extends State<NotesListPage> {
     NoteModel(name: 'name10', createdAt: DateTime.now(), note: 'note10'),
   ]);
 
+  Color color = Color.fromARGB(255, 62, 62, 66) ;
+  Color nextColor = Color.fromARGB(255, 86, 86, 90);
+  Color aux = Color(0);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,16 +36,17 @@ class _NotesListPageState extends State<NotesListPage> {
         title: const Text('Notas'),
       ),
       body: Container(
-        color: const Color(0xff1d1d1f),
-        padding: const EdgeInsets.all(16),
-        child: ListView.separated(
+        color: const Color.fromARGB(255, 51, 51, 54),
+        child: ListView.builder(
           itemBuilder: ((context, index) {
-            return NoteCardComponent(noteModel: notes[index]);
-          }),
-          separatorBuilder: ((context, index) {
-            return const Divider(
-              color: Color(0xfff5f5f7),
-              thickness: 1,
+            aux = color;
+            color = nextColor;
+            nextColor = aux;
+
+            return NoteCardComponent(
+              note: notes[index],
+              color: color,
+              nextColor: nextColor,
             );
           }),
           itemCount: notes.length,

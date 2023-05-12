@@ -1,46 +1,54 @@
+import 'package:app_bloco_notas/models/enums/weekday_enum.dart';
 import 'package:app_bloco_notas/models/note_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 class NoteCardComponent extends StatelessWidget {
-  NoteModel noteModel;
+  const NoteCardComponent({
+    required this.color,
+    required this.nextColor,
+    required this.note,
+  });
 
-  NoteCardComponent({super.key, required this.noteModel});
+  final NoteModel note;
+  final Color color;
+  final Color nextColor;
 
-  var dropDownItems = ['Deletar'];
+  
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        noteModel.name,
-        style: const TextStyle(
-          fontWeight: FontWeight.w700,
-          fontSize: 20,
-          color: Color(0xfff5f5f7),
+    return Container(
+      color: nextColor,
+      child: Container(
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(80.0),
+          ),
         ),
-      ),
-      leading: const Icon(
-        FontAwesomeIcons.paperclip,
-        color: Color(0xfff5f5f7),
-      ),
-      trailing: DropdownButton(
-        icon: const Icon(
-          Icons.more_vert_rounded,
-          color: Color(0xfff5f5f7),
+        padding: const EdgeInsets.only(
+          left: 32,
+          top: 80.0,
+          bottom: 50,
         ),
-        onChanged: (value) {},
-        items: dropDownItems.map<DropdownMenuItem<String>>(
-          (value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(
-                value,
-                style: const TextStyle(color: Colors.black),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Created at: ${DateFormat.yMMMEd().format(note.createdAt)}',
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
-            );
-          },
-        ).toList(),
+              Text(
+                note.name,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold),
+              ),
+              Row(),
+            ]),
       ),
     );
   }
