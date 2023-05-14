@@ -1,6 +1,10 @@
 import 'dart:math';
 
+import 'package:app_bloco_notas/components/clips/curved_rectangle_clip.dart';
+import 'package:app_bloco_notas/components/commom/enums/card_linear_gradient_color_enum.dart';
 import 'package:app_bloco_notas/components/note_card_component.dart';
+import 'package:app_bloco_notas/components/clips/notes_list_header_clip.dart';
+import 'package:app_bloco_notas/components/notes_list_page_header.dart';
 import 'package:app_bloco_notas/models/note_model.dart';
 import 'package:flutter/material.dart';
 
@@ -39,38 +43,63 @@ class _NotesListPageState extends State<NotesListPage> {
     Colors.purple,
   ]);
 
-  Color color = Color(0xFF448AFF);
-  Color nextColor = Color(0xFFE040FB);
-  Color aux = Color(0);
-
-  // min + Random(). nextInt((max + 1) - min);
+  List<Color> color = CardLinearGradientColorEnum.DARK_BLUE;
+  List<Color> nextColor = CardLinearGradientColorEnum.DARK_PURPLE;
+  List<Color> aux = [];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Theme.of(context).primaryColor,
-        title: const Text('Notas'),
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color.fromARGB(255, 15, 15, 15),
+            Color.fromARGB(255, 20, 20, 20),
+          ],
+        ),
       ),
-      body: Container(
-        color: const Color(0xff1d1d1f),
-        padding: const EdgeInsets.all(16),
-        child: ListView.builder(
-          itemBuilder: ((context, index) {
-            aux = color;
-            color = nextColor;
-            nextColor = aux;
-
-            return NoteCardComponent(
-              note: notes[index],
-              color: color,
-              nextColor: nextColor,
-            );
-          }),
-          itemCount: notes.length,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            return buildList(constraints);
+          },
         ),
       ),
     );
+  }
+
+  Widget buildList(BoxConstraints constraints) {
+    List<Widget> widgets = [];
+
+    for (NoteModel note in notes) {
+      Widget widget = NoteCardComponent(
+        note: note,
+        colors: color,
+        height: 200,
+      );
+
+      aux = color;
+      color = nextColor;
+      nextColor = aux;
+
+      widgets.add(widget);
+    }
+
+    Widget widgetStack = Stack(
+      children: [
+        Positioned(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 75),
+            child: ListView(children: widgets),
+          ),
+        ),
+        const Positioned(
+          child: NotesListPageHeader(),
+        ),
+      ],
+    );
+
+    return widgetStack;
   }
 }
