@@ -1,8 +1,8 @@
 import 'package:app_bloco_notas/components/clips/curved_rectangle_clip.dart';
 import 'package:app_bloco_notas/components/commom/card_linear_gradient.dart';
-import 'package:app_bloco_notas/components/commom/enums/card_linear_gradient_color_enum.dart';
 import 'package:app_bloco_notas/models/note_model.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NoteCardComponent extends StatelessWidget {
   NoteCardComponent({
@@ -13,8 +13,8 @@ class NoteCardComponent extends StatelessWidget {
   });
 
   final NoteModel note;
-  List<Color> colors;
   final double height;
+  final List<Color> colors;
 
   @override
   Widget build(BuildContext context) {

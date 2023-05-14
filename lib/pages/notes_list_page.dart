@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:app_bloco_notas/components/clips/curved_rectangle_clip.dart';
 import 'package:app_bloco_notas/components/commom/enums/card_linear_gradient_color_enum.dart';
 import 'package:app_bloco_notas/components/note_card_component.dart';
 import 'package:app_bloco_notas/components/clips/notes_list_header_clip.dart';
@@ -27,20 +26,6 @@ class _NotesListPageState extends State<NotesListPage> {
     NoteModel(name: 'name8', createdAt: DateTime.now(), note: 'note8'),
     NoteModel(name: 'name9', createdAt: DateTime.now(), note: 'note9'),
     NoteModel(name: 'name10', createdAt: DateTime.now(), note: 'note10'),
-  ]);
-
-  Color? lastColor;
-
-  var colors = List.of([
-    Colors.blueAccent,
-    Colors.greenAccent,
-    Colors.yellowAccent,
-  ]);
-
-  var colors2 = List.of([
-    Colors.black,
-    Colors.grey,
-    Colors.purple,
   ]);
 
   List<Color> color = CardLinearGradientColorEnum.DARK_BLUE;
