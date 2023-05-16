@@ -2,10 +2,12 @@ import 'dart:math';
 
 import 'package:app_bloco_notas/components/commom/enums/card_linear_gradient_color_enum.dart';
 import 'package:app_bloco_notas/components/note_card_component.dart';
-import 'package:app_bloco_notas/components/clips/notes_list_header_clip.dart';
-import 'package:app_bloco_notas/components/notes_list_page_header.dart';
+import 'package:app_bloco_notas/components/clips/header_component_clip.dart';
+import 'package:app_bloco_notas/components/header_component.dart';
+import 'package:app_bloco_notas/models/components_config/header_component_config.dart';
 import 'package:app_bloco_notas/models/note_model.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class NotesListPage extends StatefulWidget {
   const NotesListPage({Key? key}) : super(key: key);
@@ -79,8 +81,28 @@ class _NotesListPageState extends State<NotesListPage> {
             child: ListView(children: widgets),
           ),
         ),
-        const Positioned(
-          child: NotesListPageHeader(),
+        Positioned(
+          child: HeaderComponent(
+            constraints: constraints,
+            config: HeaderComponentConfig(
+              150,
+              List.of(
+                [
+                  const Color.fromARGB(255, 45, 45, 45),
+                  const Color.fromARGB(255, 50, 50, 50),
+                ],
+              ),
+              List.of(
+                [
+                  HeaderComponentButtonsConfig(
+                    icon: FontAwesomeIcons.cross,
+                    iconColor: Colors.white,
+                    buttonText: 'Close',
+                  )
+                ],
+              ),
+            ),
+          ),
         ),
       ],
     );

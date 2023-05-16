@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class NotesListHeaderClip extends CustomClipper<Path> {
+class HeaderComponentClip extends CustomClipper<Path> {
   final double offset = 50;
   @override
   Path getClip(Size size) {
